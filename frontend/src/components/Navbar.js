@@ -7,6 +7,12 @@ const NavBar = ()=>{
                 <Link to = "/">
                     <h1>Body Workout</h1>
                 </Link>
+                <nav>
+                    <div>
+                        <Link to= "/login">Log In</Link>
+                        <Link to= "/signup">Sign Up</Link>
+                    </div>
+                </nav>
             </div>
         </header>
     );
