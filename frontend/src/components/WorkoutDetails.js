@@ -1,12 +1,22 @@
 import { useContext } from "react";
 import { WorkoutsContext } from "../contexts/WorkoutsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const WorkoutDetails = ({workout}) => {
     const {dispatch} = useContext(WorkoutsContext);
 
+    const {user} = useAuthContext();
+
     const handleClick = async () =>{
+        if(!user){
+            return;
+        }
+
         const response = await fetch('/api/workouts/'+workout._id ,{
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization' : `Bearer ${user.jwt}`
+            }
         });
         const json = await response.json();
 

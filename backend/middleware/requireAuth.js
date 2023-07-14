@@ -15,12 +15,12 @@ const requireAuth = async (req,res,next) => {
     try{
         const {_id} = jwt.verify(token,process.env.SECRET);
 
-        const user = await User.findOne({_id}).select('_id');
+        req.user = await User.findOne({_id}).select('_id');
         next();
 
     }catch(err){
         console.log(err);
-        res.send(401).json({error: "Request not verified"});
+        res.sendStatus(401).json({error: "Request not verified"});
     }
 }
 
